@@ -1,9 +1,17 @@
 import { Pool } from 'pg'
 
+const sslConfig: any = {
+  rejectUnauthorized: true,
+}
+
+if (process.env.CA_CERT_BASE64) {
+  sslConfig.ca = Buffer.from(process.env.CA_CERT_BASE64, 'base64').toString()
+}
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   max: 5,
-  ssl: { rejectUnauthorized: false },
+  ssl: sslConfig,
 })
 
 pool.on('connect', () => console.log('✅ DB connected'))

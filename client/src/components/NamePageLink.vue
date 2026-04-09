@@ -1,5 +1,5 @@
 <template>
-  <a :href="`/n/${slug}`" class="name-link">Xem thêm về {{ name }}</a>
+  <a :href="`/n/${slug}`" class="name-link"></a>
 </template>
 
 <script setup>

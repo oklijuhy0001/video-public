@@ -5,7 +5,7 @@ import { glob } from 'glob'
 let names: string[] = []
 
 export const loadNames = (): void => {
-  const pattern = path.join(__dirname, '../../data/*.txt')
+  const pattern = path.join(__dirname, '../../data/*.txt').replace(/\\/g, '/')
   const files = glob.sync(pattern)
 
   if (files.length === 0) {

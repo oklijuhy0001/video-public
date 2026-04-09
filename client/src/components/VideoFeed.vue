@@ -1,4 +1,8 @@
 <template>
+  <div class="feed-wrapper">
+  <!-- Site name top left -->
+  <div class="site-name">🎬 VideoSite</div>
+
   <div class="feed" ref="feedEl">
     <VideoItem
       v-for="(video, i) in videos"
@@ -10,6 +14,7 @@
     />
     <div v-if="loading" class="loading-spinner">⏳</div>
     <div v-if="videos.length === 0 && !loading" class="empty">Không có video nào.</div>
+  </div>
   </div>
 </template>
 
@@ -77,6 +82,24 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.feed-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+.site-name {
+  position: fixed;
+  top: 14px;
+  left: 16px;
+  z-index: 100;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+  pointer-events: none;
+  user-select: none;
+}
 .feed {
   height: 100vh;
   overflow-y: scroll;
