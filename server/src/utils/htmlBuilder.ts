@@ -27,6 +27,11 @@ export const buildShell = ({
   ${canonical ? `<link rel="canonical" href="${escHtml(canonical)}" />` : ''}
   ${metaTags.join('\n  ')}
   ${schemaJson ? `<script type="application/ld+json">${schemaJson}<\/script>` : ''}
+  <link rel="stylesheet" crossorigin href="/assets/index-QhYmeNX7.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body, #app { height: 100%; width: 100%; overflow: hidden; background: #000; color: #fff; font-family: system-ui, sans-serif; }
+  </style>
 </head>
 <body>
   <div id="app"></div>

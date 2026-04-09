@@ -10,12 +10,6 @@
       class="video-el"
     />
     <div class="overlay">
-      <!-- Bottom left: title + name link -->
-      <div class="info">
-        <a :href="`/v/${video.id}-${video.slug}`" class="video-title">{{ video.name }}</a>
-        <NamePageLink :name="video.name" :slug="video.slug" />
-      </div>
-
       <!-- Bottom right: share button -->
       <button class="share-btn" @click="share" :title="copied ? 'Đã copy!' : 'Chia sẻ'">
         <span v-if="copied" class="share-icon">✅</span>
@@ -93,7 +87,10 @@ const share = async () => {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center;
   display: block;
+  max-width: 100vw;
+  max-height: 100vh;
 }
 .overlay {
   position: absolute;
@@ -101,11 +98,10 @@ const share = async () => {
   left: 0;
   right: 0;
   padding: 20px 16px 36px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.72));
+  background: linear-gradient(transparent, rgba(0,0,0,0.3));
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: flex-end;
 }
 .info {
   display: flex;

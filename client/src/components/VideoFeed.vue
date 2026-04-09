@@ -67,10 +67,40 @@ const checkNewItems = () => {
   }
 }
 
+// Handle URL path /v/:slug
+const handleUrlRoute = async () => {
+  const path = location.pathname
+  if (path.startsWith('/v/')) {
+    const parts = path.split('/')
+    const slug = parts[parts.length - 1]
+    const id = parseInt(slug.split('-')[0])
+    
+    if (!isNaN(id)) {
+      // Max 5 fetches to avoid infinite loop
+      let fetches = 0
+      while (!videos.value.find(v => v.id === id) && offset.value < total.value && fetches < 5) {
+        await fetchMore()
+        fetches++
+      }
+      
+      const idx = videos.value.findIndex(v => v.id === id)
+      if (idx !== -1) {
+        activeIndex.value = idx
+        // Scroll to this video
+        const items = feedEl.value?.querySelectorAll('.video-item')
+        if (items && items[idx]) {
+          items[idx].scrollIntoView({ behavior: 'auto' })
+        }
+      }
+    }
+  }
+}
+
 let watchTimer = null
 onMounted(async () => {
   setupObserver()
   await fetchMore()
+  await handleUrlRoute()
   observeItems()
   watchTimer = setInterval(checkNewItems, 500)
 })
